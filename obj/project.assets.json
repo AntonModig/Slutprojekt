@@ -7385,11 +7385,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Anton\\Downloads\\program\\Slutprojekt\\Slutprojekt.csproj",
+      "projectUniqueName": "C:\\Users\\Anton\\Downloads\\program\\Slutprojekt\\Slutprojekt.csproj",
       "projectName": "Slutprojekt",
-      "projectPath": "c:\\Users\\Anton\\Downloads\\program\\Slutprojekt\\Slutprojekt.csproj",
+      "projectPath": "C:\\Users\\Anton\\Downloads\\program\\Slutprojekt\\Slutprojekt.csproj",
       "packagesPath": "C:\\Users\\Anton\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Anton\\Downloads\\program\\Slutprojekt\\obj\\",
+      "outputPath": "C:\\Users\\Anton\\Downloads\\program\\Slutprojekt\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Anton\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -7443,7 +7443,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
       }
     }
   }
