@@ -18,6 +18,12 @@ namespace Slutprojekt
         int UpSpeed;
         int JumpCharges;
         int Jumps;
+        bool FacingRight;
+        int speed;
+        public bool BlinkCharged;
+        public float timer = 10;
+        const float TIMER = 10;
+
 
         public Player (Texture2D texture, Vector2 position)
         {
@@ -26,7 +32,7 @@ namespace Slutprojekt
             player = new Rectangle((int)position.X, (int)position.Y, 20, 20);
         }
 
-        public void Update(Game1 game)
+        public void Update(Game1 game, GameTime gameTime)
         {
             KeyboardState kstate = Keyboard.GetState();
             Board.GetState();
@@ -34,47 +40,136 @@ namespace Slutprojekt
             
             if (kstate.IsKeyDown(Keys.Left))
             {
-                player.X -= 5;
+                FaceLeft();
             }
             if (kstate.IsKeyDown(Keys.Right))
             {
-                player.X += 5;
+                FaceRight();
             }
+            if (kstate.IsKeyUp(Keys.Right) || kstate.IsKeyUp(Keys.Left))
+            {
+                Deccelerate();
+            }
+
+            Move();
+
             if (player.X < 0)
             {
-                player.X = oldposition.X;
+                StopMovement();
             }
             if (player.X > GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width - 19)
             {
-                player.X = oldposition.X;
+                StopMovement();
             }
-            if (Jumps < JumpCharges)
+            if (Jumps < JumpCharges && Board.HasBeenPressed(Keys.Up))
             {
-                if (Board.HasBeenPressed(Keys.Up))
-                {
-                    falling = true;
-                    UpSpeed = 15;
-                    Jumps++;
-                }
+                Jump();
             }
             player.Y -= UpSpeed;
             if (falling == true)
             {
-                if (UpSpeed > -15)
-                {
-                    UpSpeed--;
-                }
+                Gravity();
             }
-
+            if (BlinkCharged == true && Board.HasBeenPressed(Keys.LeftShift))
+            {
+                Blink();
+                BlinkCharged = false;
+            }
+            if (BlinkCharged == false)
+            {
+                RechargeBlink(gameTime);
+            }
+            
             oldposition = player;
         }
+
+
         public void Stop ()
         {
             UpSpeed = 0;
             falling = false;
-            player = oldposition;
             Jumps = 0;
+            StopMovement();
         }
+
+
+        private void StopMovement()
+        {
+            player = oldposition;
+        }
+
+        private void Blink()
+        {
+            for (int i = 0;  i < 100; i++)
+                {
+                    if (FacingRight == true && player.X < GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width - 19)
+                    {
+                        player.X++;
+                    }
+                    else if (FacingRight == false && player.X > 0)
+                    {
+                        player.X--;
+                    }
+                }
+        }
+
+        private void RechargeBlink(GameTime gameTime)
+        {
+            float Elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            timer -= Elapsed;
+            if (timer < 0)
+            {
+                ChargeBlink();
+                timer = TIMER;
+            }
+        }
+        public void ChargeBlink()
+        {
+            BlinkCharged = true;
+        }
+        private void Jump()
+        {
+            falling = true;
+            UpSpeed = 15;
+            Jumps++;
+            player = oldposition;
+        }
+        private void Gravity()
+        {
+            if (UpSpeed > -15)
+                {
+                    UpSpeed--;
+                }
+        }
+        private void Move()
+        {
+            player.X += speed;
+        }
+        private void FaceRight()
+        {
+            speed = 5;
+            FacingRight = true;
+        }
+        private void FaceLeft()
+        {
+            speed = -5;
+            FacingRight = false;
+        }
+        private void Deccelerate()
+        {
+            if (speed != 0 && falling == false)
+            {
+                if (speed > 0)
+                {
+                    speed --;
+                }
+                else
+                {
+                    speed++;
+                }
+            }
+        }
+
 
         public void Draw(SpriteBatch spriteBatch)
         {

@@ -12,25 +12,33 @@ namespace Slutprojekt
         Texture2D StartTexture;
         Texture2D QuitTexture;
         Texture2D GameBGtxt;
+        Texture2D BlinkIcon;
         StartButton StartButton;
         QuitButton QuitButton;
         GameBackground GameBG;
         public Ground Ground;
-        Player Player;
+        public Player Player1;
+        BlinkIcon Blinkicon;
         bool hasstarted;
+        public SpriteFont font;
+
+
 
 
                 
 
         //Temporary texture
         Texture2D pixel;
-        
+
+
+
         //Starting the game
         public void StartGame()
         {
             this.hasstarted = true;
         }
         
+
         //method for quitting game
         public void Quit()
         {
@@ -54,7 +62,7 @@ namespace Slutprojekt
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             _graphics.IsFullScreen = true;
-            _graphics.PreferredBackBufferHeight = 788;
+            _graphics.PreferredBackBufferHeight = 768;
             _graphics.PreferredBackBufferWidth = 1366;
         }
 
@@ -82,8 +90,15 @@ namespace Slutprojekt
             StartTexture = Content.Load<Texture2D>("Start Button");
             QuitTexture = Content.Load<Texture2D>("Quit Button");
 
+            //Loading it the font
+            font = Content.Load<SpriteFont>("Font");
+
             //Loading background in game
             GameBGtxt = Content.Load<Texture2D>("GameBackground");
+            
+            //Loading in the blink icon
+            BlinkIcon = Content.Load<Texture2D>("Dash Icon");
+            
 
             //Making the Buttons
             StartButton = new StartButton(StartTexture, new Vector2(300, 588));
@@ -96,7 +111,14 @@ namespace Slutprojekt
             Ground = new Ground (pixel, new Vector2(0, 588));
 
             //Making the Player
-            Player = new Player (pixel, new Vector2(100, 568));
+            Player1 = new Player (pixel, new Vector2(100, 568));
+
+            //Making the game start with a blink charged
+            Player1.ChargeBlink();
+
+            //Making the Blink Icon
+            Blinkicon = new BlinkIcon(BlinkIcon, new Vector2(1316, 718));
+
 
             // TODO: use this.Content to load your game content here
         }
@@ -106,6 +128,8 @@ namespace Slutprojekt
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+                
+
             if (this.hasstarted == false)
             {
                 StartButton.Update(this);
@@ -113,10 +137,12 @@ namespace Slutprojekt
             }
             if (hasstarted == true)
             {
-                Player.Update(this);
-                if (Player.player.Intersects(Ground.ground))
+                Player1.Update(this, gameTime);
+                Blinkicon.Update(this);
+
+                if (Player1.player.Intersects(Ground.ground))
                 {
-                    Player.Stop();
+                    Player1.Stop();
                 }
             }
 
@@ -141,7 +167,8 @@ namespace Slutprojekt
             {
                 GameBG.Draw(_spriteBatch);
                 Ground.Draw(_spriteBatch);
-                Player.Draw(_spriteBatch);
+                Blinkicon.Draw(_spriteBatch);
+                Player1.Draw(_spriteBatch);
             }
 
             _spriteBatch.End();
