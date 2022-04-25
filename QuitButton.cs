@@ -29,7 +29,7 @@ namespace Slutprojekt
                 color = Color.White;
                 if (mstate.LeftButton == ButtonState.Pressed)
                 {
-                    game.Quit();
+                    game.Exit();
                 }
             }
             else

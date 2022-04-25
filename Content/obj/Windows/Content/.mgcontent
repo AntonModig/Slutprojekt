@@ -4,15 +4,17 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Anton/Downloads/program/Slutprojekt/Content/Dash Icon.png</File>
-    <File>C:/Users/Anton/Downloads/program/Slutprojekt/Content/Font.spritefont</File>
-    <File>C:/Users/Anton/Downloads/program/Slutprojekt/Content/GameBackground.png</File>
-    <File>C:/Users/Anton/Downloads/program/Slutprojekt/Content/pixel.png</File>
-    <File>C:/Users/Anton/Downloads/program/Slutprojekt/Content/Quit Button.png</File>
-    <File>C:/Users/Anton/Downloads/program/Slutprojekt/Content/Start Button.png</File>
-    <File>C:/Users/Anton/Downloads/program/Slutprojekt/Content/TitleScreen.jpg</File>
+    <File>C:/Users/anmo04001/Downloads/Program/Slutprojekt/Slutprojekt/Content/Dash Icon.png</File>
+    <File>C:/Users/anmo04001/Downloads/Program/Slutprojekt/Slutprojekt/Content/Font.spritefont</File>
+    <File>C:/Users/anmo04001/Downloads/Program/Slutprojekt/Slutprojekt/Content/GameBackground.png</File>
+    <File>C:/Users/anmo04001/Downloads/Program/Slutprojekt/Slutprojekt/Content/pixel.png</File>
+    <File>C:/Users/anmo04001/Downloads/Program/Slutprojekt/Slutprojekt/Content/Quit Button.png</File>
+    <File>C:/Users/anmo04001/Downloads/Program/Slutprojekt/Slutprojekt/Content/Resume.png</File>
+    <File>C:/Users/anmo04001/Downloads/Program/Slutprojekt/Slutprojekt/Content/Start Button.png</File>
+    <File>C:/Users/anmo04001/Downloads/Program/Slutprojekt/Slutprojekt/Content/TitleScreen.jpg</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

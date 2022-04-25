@@ -42,3 +42,48 @@ C:\Users\Anton\Downloads\program\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Qui
 C:\Users\Anton\Downloads\program\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Start Button.xnb
 C:\Users\Anton\Downloads\program\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Dash Icon.xnb
 C:\Users\Anton\Downloads\program\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Font.xnb
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\obj\Debug\netcoreapp3.1\Slutprojekt.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\obj\Debug\netcoreapp3.1\Slutprojekt.pdb
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Dash Icon.xnb
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Font.xnb
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Content\GameBackground.xnb
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Content\pixel.xnb
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Quit Button.xnb
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Start Button.xnb
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Content\TitleScreen.xnb
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Slutprojekt.exe
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Slutprojekt.deps.json
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Slutprojekt.runtimeconfig.json
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Slutprojekt.runtimeconfig.dev.json
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Slutprojekt.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Slutprojekt.pdb
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Microsoft.VisualBasic.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\MonoGame.Framework.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\SharpDX.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\SharpDX.Direct2D1.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\SharpDX.Direct3D11.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\SharpDX.Direct3D9.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\SharpDX.DXGI.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\SharpDX.Mathematics.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\SharpDX.MediaFoundation.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\SharpDX.XAudio2.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\SharpDX.XInput.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\runtimes\debian-x64\native\libuv.so
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\runtimes\fedora-x64\native\libuv.so
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\runtimes\opensuse-x64\native\libuv.so
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\runtimes\osx\native\libuv.dylib
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\runtimes\rhel-x64\native\libuv.so
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\runtimes\win7-arm\native\libuv.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\runtimes\win7-x64\native\libuv.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\runtimes\win7-x86\native\libuv.dll
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\obj\Debug\netcoreapp3.1\Slutprojekt.csproj.AssemblyReference.cache
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\obj\Debug\netcoreapp3.1\Slutprojekt.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\obj\Debug\netcoreapp3.1\Slutprojekt.AssemblyInfoInputs.cache
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\obj\Debug\netcoreapp3.1\Slutprojekt.AssemblyInfo.cs
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\obj\Debug\netcoreapp3.1\Slutprojekt.csproj.CoreCompileInputs.cache
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\obj\Debug\netcoreapp3.1\Slutprojekt.csproj.CopyComplete
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\obj\Debug\netcoreapp3.1\Slutprojekt.genruntimeconfig.cache
+C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Resume.xnb

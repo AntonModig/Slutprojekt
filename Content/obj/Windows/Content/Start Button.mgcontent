@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Anton/Downloads/program/Slutprojekt/Content/Start Button.png</SourceFile>
-  <SourceTime>2022-03-21T08:57:37.6488716+01:00</SourceTime>
-  <DestFile>C:/Users/Anton/Downloads/program/Slutprojekt/Content/bin/Windows/Content/Start Button.xnb</DestFile>
-  <DestTime>2022-03-28T15:06:12.6285891+02:00</DestTime>
+  <SourceFile>C:/Users/anmo04001/Downloads/Program/Slutprojekt/Slutprojekt/Content/Start Button.png</SourceFile>
+  <SourceTime>2022-04-20T13:42:09.0940071+02:00</SourceTime>
+  <DestFile>C:/Users/anmo04001/Downloads/Program/Slutprojekt/Slutprojekt/Content/bin/Windows/Content/Start Button.xnb</DestFile>
+  <DestTime>2022-04-25T09:46:06.1244835+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T18:17:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

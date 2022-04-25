@@ -21,15 +21,18 @@ namespace Slutprojekt
         bool FacingRight;
         int speed;
         public bool BlinkCharged;
+        int playerheight = 20;
         public float timer = 10;
         const float TIMER = 10;
+        Rectangle ground;
+        public int HP = 100;
 
 
         public Player (Texture2D texture, Vector2 position)
         {
             this.texture = texture;
             this.position = position;
-            player = new Rectangle((int)position.X, (int)position.Y, 20, 20);
+            player = new Rectangle((int)position.X, (int)position.Y, playerheight, 20);
         }
 
         public void Update(Game1 game, GameTime gameTime)
@@ -37,7 +40,12 @@ namespace Slutprojekt
             KeyboardState kstate = Keyboard.GetState();
             Board.GetState();
             JumpCharges = 2;
+            ground = game.Ground.ground;
             
+            if (player.Intersects(ground))
+            {
+                Stop();
+            }
             if (kstate.IsKeyDown(Keys.Left))
             {
                 FaceLeft();
@@ -86,10 +94,10 @@ namespace Slutprojekt
 
         public void Stop ()
         {
+            player.Y = ground.Y - playerheight;
             UpSpeed = 0;
             falling = false;
             Jumps = 0;
-            StopMovement();
         }
 
 
@@ -100,7 +108,7 @@ namespace Slutprojekt
 
         private void Blink()
         {
-            for (int i = 0;  i < 100; i++)
+            for (int i = 0;  i < 150; i++)
                 {
                     if (FacingRight == true && player.X < GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width - 19)
                     {
