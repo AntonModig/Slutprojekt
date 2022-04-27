@@ -26,9 +26,10 @@ namespace Slutprojekt
         const float TIMER = 10;
         Rectangle ground;
         public int HP = 100;
+        public int MaxHP = 100;
 
 
-        public Player (Texture2D texture, Vector2 position)
+         public Player (Texture2D texture, Vector2 position)
         {
             this.texture = texture;
             this.position = position;
@@ -49,10 +50,12 @@ namespace Slutprojekt
             if (kstate.IsKeyDown(Keys.Left))
             {
                 FaceLeft();
+                HP--;
             }
             if (kstate.IsKeyDown(Keys.Right))
             {
                 FaceRight();
+                HP++;
             }
             if (kstate.IsKeyUp(Keys.Right) || kstate.IsKeyUp(Keys.Left))
             {

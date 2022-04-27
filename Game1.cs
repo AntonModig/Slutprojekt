@@ -121,6 +121,7 @@ namespace Slutprojekt
             if (hasstarted == true && isPaused == false)
             {
                 Player1.Update(this, gameTime);
+                Healthbar.Update(Player1);
                 Blinkicon.Update(this);
             }
             if (isPaused == true)

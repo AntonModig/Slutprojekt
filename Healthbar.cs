@@ -12,17 +12,18 @@ namespace Slutprojekt
     {
         Texture2D texture;
         Rectangle HPbar;
-
+        float length;
 
         public Healthbar(Texture2D texture, Player player)
         {
             this.texture = texture;
-            HPbar = new Rectangle(50, 50, player.HP * 3, 20);
+            length = player.HP;
+            HPbar = new Rectangle(50, 50, (int)length, 20);
         }
 
         public void Update(Player player)
         {
-
+            length = player.HP / player.MaxHP * 300;
         }
 
         public void Draw(SpriteBatch spriteBatch)
