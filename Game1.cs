@@ -17,18 +17,15 @@ namespace Slutprojekt
         StartButton StartButton;
         QuitButton QuitButton;
         GameBackground GameBG;
-        public Ground Ground;
         public Player Player1;
         ResumeButton ResumeButton;
         BlinkIcon Blinkicon;
         public bool hasstarted;
         public SpriteFont font;
         public bool isPaused;
-        Healthbar Healthbar;
-
-        //Temporary texture
+        Healthbar healthbar;
         Texture2D pixel;
-
+        public Map1 MAP1;
 
 
         private GraphicsDeviceManager _graphics;
@@ -88,19 +85,19 @@ namespace Slutprojekt
             GameBG = new GameBackground(GameBGtxt);
 
             //Making the ground
-            Ground = new Ground (pixel, new Vector2(0, 588));
+            MAP1 = new Map1 (pixel);
 
             //Making the Player
-            Player1 = new Player (pixel, new Vector2(100, 568));
+            Player1 = new Player (pixel, new Vector2(100, 580));
 
-            //Making hp-bar
-            Healthbar = new Healthbar (pixel, Player1);
-
-            //Making the game start with a blink charged
-            Player1.ChargeBlink();
+            //Setting up for the start of the game;
+            DoInitialSetup(Player1);
 
             //Making the Blink Icon
             Blinkicon = new BlinkIcon(BlinkIcon, new Vector2(50, 698));
+
+            //Making hp-bar
+            healthbar = new Healthbar (pixel, Player1);
 
 
             // TODO: use this.Content to load your game content here
@@ -121,7 +118,7 @@ namespace Slutprojekt
             if (hasstarted == true && isPaused == false)
             {
                 Player1.Update(this, gameTime);
-                Healthbar.Update(Player1);
+                healthbar.Update(Player1);
                 Blinkicon.Update(this);
             }
             if (isPaused == true)
@@ -150,10 +147,11 @@ namespace Slutprojekt
             if (hasstarted == true && isPaused == false)
             {
                 GameBG.Draw(_spriteBatch);
-                Ground.Draw(_spriteBatch);
+                MAP1.Draw(_spriteBatch);
+                
                 Blinkicon.Draw(_spriteBatch);
                 Player1.Draw(_spriteBatch);
-                Healthbar.Draw(_spriteBatch);
+                healthbar.Draw(_spriteBatch);
             }
             if (isPaused == true)
             {
@@ -168,6 +166,11 @@ namespace Slutprojekt
             
 
             base.Draw(gameTime);
+        }
+
+        private void DoInitialSetup(Player player)
+        {
+            player.ChargeBlink();
         }
     }
 }

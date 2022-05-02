@@ -21,19 +21,18 @@ namespace Slutprojekt
         bool FacingRight;
         int speed;
         public bool BlinkCharged;
-        int playerheight = 20;
         public float timer = 10;
         const float TIMER = 10;
-        Rectangle ground;
-        public int HP = 100;
-        public int MaxHP = 100;
+        float MaxHP = 100;
+        float HP = 100;
+        public float HPpercent;
 
 
          public Player (Texture2D texture, Vector2 position)
         {
             this.texture = texture;
             this.position = position;
-            player = new Rectangle((int)position.X, (int)position.Y, playerheight, 20);
+            player = new Rectangle((int)position.X, (int)position.Y, 20, 20);
         }
 
         public void Update(Game1 game, GameTime gameTime)
@@ -41,21 +40,42 @@ namespace Slutprojekt
             KeyboardState kstate = Keyboard.GetState();
             Board.GetState();
             JumpCharges = 2;
-            ground = game.Ground.ground;
+            HPpercent = HP / MaxHP;
             
-            if (player.Intersects(ground))
+            foreach (Rectangle element in game.MAP1.Tiles)
             {
-                Stop();
+                if(player.Intersects(element))
+                {
+                    if (player.Y > element.Y - player.Height)
+                    {
+                        Stop();
+                        player.Y = element.Y - player.Height;
+                    }
+                    if(player.X < element.X - player.Height)
+                    {
+                        player.X = element.X - player.Height;
+                    }
+                }
+            }
+            
+            if (kstate.IsKeyDown(Keys.O))
+            {
+                HP--;
+            }
+            if (HP <= 0)
+            {
+                game.hasstarted = false;
+                HP = 100;
+                MaxHP = 100;
+                ChargeBlink();
             }
             if (kstate.IsKeyDown(Keys.Left))
             {
                 FaceLeft();
-                HP--;
             }
             if (kstate.IsKeyDown(Keys.Right))
             {
                 FaceRight();
-                HP++;
             }
             if (kstate.IsKeyUp(Keys.Right) || kstate.IsKeyUp(Keys.Left))
             {
@@ -81,6 +101,7 @@ namespace Slutprojekt
             {
                 Gravity();
             }
+
             if (BlinkCharged == true && Board.HasBeenPressed(Keys.LeftShift))
             {
                 Blink();
@@ -90,6 +111,10 @@ namespace Slutprojekt
             {
                 RechargeBlink(gameTime);
             }
+            if (HP > MaxHP)
+            {
+                HP = MaxHP;
+            }
             
             oldposition = player;
         }
@@ -97,7 +122,6 @@ namespace Slutprojekt
 
         public void Stop ()
         {
-            player.Y = ground.Y - playerheight;
             UpSpeed = 0;
             falling = false;
             Jumps = 0;

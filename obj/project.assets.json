@@ -7380,19 +7380,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\anmo04001\\.nuget\\packages\\": {}
+    "C:\\Users\\Anton\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\anmo04001\\Downloads\\Program\\Slutprojekt\\Slutprojekt\\Slutprojekt.csproj",
+      "projectUniqueName": "C:\\Users\\Anton\\Downloads\\program\\Slutprojekt\\Slutprojekt.csproj",
       "projectName": "Slutprojekt",
-      "projectPath": "C:\\Users\\anmo04001\\Downloads\\Program\\Slutprojekt\\Slutprojekt\\Slutprojekt.csproj",
-      "packagesPath": "C:\\Users\\anmo04001\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\anmo04001\\Downloads\\Program\\Slutprojekt\\Slutprojekt\\obj\\",
+      "projectPath": "C:\\Users\\Anton\\Downloads\\program\\Slutprojekt\\Slutprojekt.csproj",
+      "packagesPath": "C:\\Users\\Anton\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Anton\\Downloads\\program\\Slutprojekt\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\anmo04001\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Anton\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -7443,7 +7443,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.405\\RuntimeIdentifierGraph.json"
       }
     }
   }
