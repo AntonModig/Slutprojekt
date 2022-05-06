@@ -26,6 +26,8 @@ namespace Slutprojekt
         Healthbar healthbar;
         Texture2D pixel;
         public Map1 MAP1;
+        HealAbility Healing;
+        Texture2D HealingIcon;
 
 
         private GraphicsDeviceManager _graphics;
@@ -72,9 +74,9 @@ namespace Slutprojekt
             //Loading background in game
             GameBGtxt = Content.Load<Texture2D>("GameBackground");
             
-            //Loading in the blink icon
+            //Loading in the blink icon & healing
             BlinkIcon = Content.Load<Texture2D>("Dash Icon");
-            
+            HealingIcon = Content.Load<Texture2D>("Healing Icon");
 
             //Making the Buttons
             StartButton = new StartButton(StartTexture, new Vector2(300, 588));
@@ -90,11 +92,9 @@ namespace Slutprojekt
             //Making the Player
             Player1 = new Player (pixel, new Vector2(100, 580));
 
-            //Setting up for the start of the game;
-            DoInitialSetup(Player1);
-
-            //Making the Blink Icon
-            Blinkicon = new BlinkIcon(BlinkIcon, new Vector2(50, 698));
+            //Making the Blink Icon && healing
+            Blinkicon = new BlinkIcon(BlinkIcon);
+            Healing = new HealAbility(HealingIcon);
 
             //Making hp-bar
             healthbar = new Healthbar (pixel, Player1);
@@ -120,6 +120,7 @@ namespace Slutprojekt
                 Player1.Update(this, gameTime);
                 healthbar.Update(Player1);
                 Blinkicon.Update(this);
+                Healing.Update(Player1, gameTime, this);
             }
             if (isPaused == true)
             {
@@ -150,6 +151,7 @@ namespace Slutprojekt
                 MAP1.Draw(_spriteBatch);
                 
                 Blinkicon.Draw(_spriteBatch);
+                Healing.Draw(_spriteBatch);
                 Player1.Draw(_spriteBatch);
                 healthbar.Draw(_spriteBatch);
             }
@@ -166,11 +168,6 @@ namespace Slutprojekt
             
 
             base.Draw(gameTime);
-        }
-
-        private void DoInitialSetup(Player player)
-        {
-            player.ChargeBlink();
         }
     }
 }

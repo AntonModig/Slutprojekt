@@ -88,3 +88,4 @@ C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\obj\Debug\netcoreap
 C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\obj\Debug\netcoreapp3.1\Slutprojekt.genruntimeconfig.cache
 C:\Users\anmo04001\Downloads\Program\Slutprojekt\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Resume.xnb
 C:\Users\Anton\Downloads\program\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Resume.xnb
+C:\Users\Anton\Downloads\program\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Healing Icon.xnb

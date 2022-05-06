@@ -8,28 +8,36 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Slutprojekt
 {
-    public class BlinkIcon
+    public class HealAbility
     {
         Texture2D texture;
-        Rectangle icon;
+        Rectangle Icon;
+        public float timer = 20;
+        const float TIMER = 20;
         Color color;
         SpriteFont font;
         bool Charged;
         int Countdown;
         string CountdownStr;
         Vector2 CountdownPosition;
+        
 
-        public BlinkIcon(Texture2D texture)
+        public HealAbility(Texture2D texture)
         {
             this.texture = texture;
-            icon = new Rectangle(50, 698, 32, 32);
+            Icon = new Rectangle (15, 698, 32, 32);
         }
 
-        public void Update(Game1 game)
+        public void Update(Player player, GameTime gameTime, Game1 game)
         {
-            Charged = game.Player1.BlinkCharged;
-            Countdown = (int)game.Player1.timer + 1;
+            Charged = player.HealingReady;
+            Countdown = (int)timer + 1;
             CountdownStr = Countdown.ToString();
+            
+            if (Charged == false)
+            {   
+                RechargeHeal(player, gameTime);
+            }
 
             if (Charged == true)
             {
@@ -39,24 +47,36 @@ namespace Slutprojekt
             {
                 color = Color.Gray;
             }
-            if (Countdown == 10)
+            if (Countdown >= 10)
             {   
-                CountdownPosition = new Vector2(icon.X + 2, icon.Y + 4);
+                CountdownPosition = new Vector2(Icon.X + 2, Icon.Y + 4);
             }
             else if (Countdown < 10)
             {
-                CountdownPosition = new Vector2(icon.X + 9, icon.Y + 4);
+                CountdownPosition = new Vector2(Icon.X + 9, Icon.Y + 4);
             }
             font = game.font;
         }
+
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, icon, color);
+            spriteBatch.Draw(texture, Icon, color);
 
             if (Charged == false)
             {
                 spriteBatch.DrawString(font, CountdownStr, CountdownPosition, Color.White);
             }
         }
-    }   
+
+        public void RechargeHeal(Player player, GameTime gameTime)
+        {
+            float Elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            timer -= Elapsed;
+            if (timer < 0)
+            {
+                player.RefillHeal();
+                timer = TIMER;
+            }
+        }
+    }
 }

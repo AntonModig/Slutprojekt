@@ -20,12 +20,14 @@ namespace Slutprojekt
         int Jumps;
         bool FacingRight;
         int speed;
-        public bool BlinkCharged;
+        public bool BlinkCharged = true;
         public float timer = 10;
         const float TIMER = 10;
         float MaxHP = 100;
         float HP = 100;
         public float HPpercent;
+        public bool HealingReady = true;
+        bool GroundPounding;
 
 
          public Player (Texture2D texture, Vector2 position)
@@ -42,19 +44,13 @@ namespace Slutprojekt
             JumpCharges = 2;
             HPpercent = HP / MaxHP;
             
-            foreach (Rectangle element in game.MAP1.Tiles)
+            foreach (Rectangle GroundTile in game.MAP1.GroundTiles)
             {
-                if(player.Intersects(element))
+                if(player.Intersects(GroundTile))
                 {
-                    if (player.Y > element.Y - player.Height)
-                    {
-                        Stop();
-                        player.Y = element.Y - player.Height;
-                    }
-                    if(player.X < element.X - player.Height)
-                    {
-                        player.X = element.X - player.Height;
-                    }
+                    Stop();
+                    StopMovement();
+                    player.Y = GroundTile.Y - player.Height;
                 }
             }
             
@@ -65,9 +61,7 @@ namespace Slutprojekt
             if (HP <= 0)
             {
                 game.hasstarted = false;
-                HP = 100;
-                MaxHP = 100;
-                ChargeBlink();
+                Reset();
             }
             if (kstate.IsKeyDown(Keys.Left))
             {
@@ -81,8 +75,10 @@ namespace Slutprojekt
             {
                 Deccelerate();
             }
-
-            Move();
+            if (GroundPounding == false)
+            {
+                Move();
+            }
 
             if (player.X < 0)
             {
@@ -115,24 +111,56 @@ namespace Slutprojekt
             {
                 HP = MaxHP;
             }
+            if (HealingReady == true && Board.HasBeenPressed(Keys.E))
+            {
+                Heal();
+                HealingReady = false;
+            }
+            if (Board.HasBeenPressed(Keys.Down) && falling == true)
+            {
+                GroundPound();
+            }
             
             oldposition = player;
         }
 
-
-        public void Stop ()
+        
+        
+        private void GroundPound()
+        {
+            speed = 0;
+            UpSpeed = -30;
+            GroundPounding = true;
+        }
+        public void Heal()
+        {
+            for (int i = 0; i < 30; i++)
+            {
+                if (HP < MaxHP)
+                {
+                    HP++;
+                }
+            }
+        }
+        private void Stop ()
         {
             UpSpeed = 0;
-            falling = false;
             Jumps = 0;
+            GroundPounding = false;
         }
-
-
         private void StopMovement()
         {
             player = oldposition;
+            speed = 0;
         }
 
+        private void Reset()
+        {
+            HP = 100;
+            MaxHP = 100;
+            ChargeBlink();
+            RefillHeal();
+        }
         private void Blink()
         {
             for (int i = 0;  i < 150; i++)
@@ -157,6 +185,11 @@ namespace Slutprojekt
                 ChargeBlink();
                 timer = TIMER;
             }
+        }
+
+        public void RefillHeal()
+        {
+            HealingReady = true;
         }
         public void ChargeBlink()
         {

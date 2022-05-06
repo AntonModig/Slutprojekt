@@ -14,7 +14,7 @@ namespace Slutprojekt
         Texture2D texture;
         const int TileSize = 50;
         public Rectangle Tile = new Rectangle();
-        public List<Rectangle> Tiles = new List<Rectangle>();
+        public List<Rectangle> GroundTiles = new List<Rectangle>();
 
         public Map1(Texture2D texture)
         {
@@ -52,7 +52,7 @@ namespace Slutprojekt
                         Tile.Y = TileSize * y;
                         Tile.Width = TileSize;
                         Tile.Height = TileSize;
-                        Tiles.Add(Tile);
+                        GroundTiles.Add(Tile);
                         spriteBatch.Draw(texture, Tile, Color.DarkGreen);
                     }
                 }
