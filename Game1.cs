@@ -28,6 +28,8 @@ namespace Slutprojekt
         public Map1 MAP1;
         HealAbility Healing;
         Texture2D HealingIcon;
+        Camera Camera;
+        Vector2 CameraPosition = new Vector2 (1366 / 2, 768 / 2); //Konstanter screen height / width
 
 
         private GraphicsDeviceManager _graphics;
@@ -38,7 +40,7 @@ namespace Slutprojekt
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            _graphics.IsFullScreen = true;
+            _graphics.IsFullScreen = false;
             _graphics.PreferredBackBufferHeight = 768;
             _graphics.PreferredBackBufferWidth = 1366;
         }
@@ -55,7 +57,7 @@ namespace Slutprojekt
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
            //Loading temporary texture
-           pixel = Content.Load<Texture2D>("pixel");
+            pixel = Content.Load<Texture2D>("pixel");
            
             //Loading in titlescreen
             TitleScreenBG = Content.Load<Texture2D>("TitleScreen");
@@ -83,14 +85,20 @@ namespace Slutprojekt
             QuitButton = new QuitButton(QuitTexture, new Vector2(866, 588));
             ResumeButton = new ResumeButton(ResumeTexture, new Vector2(300, 588));
 
+            //Making Camera that follows player
+            Camera = new Camera(GraphicsDevice.Viewport);
+            Camera.Position = CameraPosition;
+            
             //Making the background in game
             GameBG = new GameBackground(GameBGtxt);
 
+            
             //Making the ground
-            MAP1 = new Map1 (pixel);
-
+            MAP1 = new Map1 (pixel, this);
+            
             //Making the Player
-            Player1 = new Player (pixel, new Vector2(100, 580));
+            Player1 = new Player (pixel, new Vector2(100, 580), MAP1);
+
 
             //Making the Blink Icon && healing
             Blinkicon = new BlinkIcon(BlinkIcon);
@@ -121,6 +129,7 @@ namespace Slutprojekt
                 healthbar.Update(Player1);
                 Blinkicon.Update(this);
                 Healing.Update(Player1, gameTime, this);
+
             }
             if (isPaused == true)
             {
@@ -129,6 +138,7 @@ namespace Slutprojekt
             }
 
             // TODO: Add your update logic here
+            Camera.UpdateCamera(GraphicsDevice.Viewport, Player1);
 
             base.Update(gameTime);
         }
@@ -145,16 +155,12 @@ namespace Slutprojekt
                 StartButton.Draw(_spriteBatch);
                 QuitButton.Draw(_spriteBatch);
             }
+
             if (hasstarted == true && isPaused == false)
             {
                 GameBG.Draw(_spriteBatch);
-                MAP1.Draw(_spriteBatch);
-                
-                Blinkicon.Draw(_spriteBatch);
-                Healing.Draw(_spriteBatch);
-                Player1.Draw(_spriteBatch);
-                healthbar.Draw(_spriteBatch);
             }
+
             if (isPaused == true)
             {
                 GameBG.Draw(_spriteBatch);
@@ -163,6 +169,31 @@ namespace Slutprojekt
             }
 
             _spriteBatch.End();
+
+            _spriteBatch.Begin(SpriteSortMode.Texture,null,null,null,null,null,Camera.Transform);
+
+            if (hasstarted == true && isPaused == false)
+            {
+                MAP1.Draw(_spriteBatch);
+                Player1.Draw(_spriteBatch);
+            }
+    
+            _spriteBatch.End();
+
+            _spriteBatch.Begin();
+
+            if (hasstarted == true && isPaused == false)
+            {
+                Blinkicon.Draw(_spriteBatch);
+                Healing.Draw(_spriteBatch);
+                healthbar.Draw(_spriteBatch);
+            }
+
+            _spriteBatch.End();
+
+
+
+            
 
             // TODO: Add your drawing code here
             

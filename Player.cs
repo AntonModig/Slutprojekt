@@ -11,9 +11,8 @@ namespace Slutprojekt
     public class Player
     {
         Texture2D texture;
-        Vector2 position;
+        public Vector2 position;
         public Rectangle player;
-        Rectangle oldposition;
         bool falling;
         int UpSpeed;
         int JumpCharges;
@@ -28,12 +27,16 @@ namespace Slutprojekt
         public float HPpercent;
         public bool HealingReady = true;
         bool GroundPounding;
+        Map1 Map1;
+        Vector2 PosInGrid;
+        bool Moving;
 
 
-         public Player (Texture2D texture, Vector2 position)
+         public Player (Texture2D texture, Vector2 position, Map1 Map1)
         {
             this.texture = texture;
             this.position = position;
+            this.Map1 = Map1;
             player = new Rectangle((int)position.X, (int)position.Y, 20, 20);
         }
 
@@ -43,16 +46,8 @@ namespace Slutprojekt
             Board.GetState();
             JumpCharges = 2;
             HPpercent = HP / MaxHP;
-            
-            foreach (Rectangle GroundTile in game.MAP1.GroundTiles)
-            {
-                if(player.Intersects(GroundTile))
-                {
-                    Stop();
-                    StopMovement();
-                    player.Y = GroundTile.Y - player.Height;
-                }
-            }
+            CheckGridPosition();
+
             
             if (kstate.IsKeyDown(Keys.O))
             {
@@ -66,38 +61,50 @@ namespace Slutprojekt
             if (kstate.IsKeyDown(Keys.Left))
             {
                 FaceLeft();
+                Moving = true;
             }
             if (kstate.IsKeyDown(Keys.Right))
             {
                 FaceRight();
+                Moving = true;
             }
             if (kstate.IsKeyUp(Keys.Right) || kstate.IsKeyUp(Keys.Left))
             {
                 Deccelerate();
             }
-            if (GroundPounding == false)
+            if (GroundPounding == false && Moving == true)
             {
                 Move();
             }
-
-            if (player.X < 0)
+            if (falling == true)
             {
-                StopMovement();
+                Gravity();
             }
-            if (player.X > GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width - 19)
+            if (Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 1 && player.Y >= PosInGrid.Y * Map1.TileSize + Map1.TileSize - player.Height)
             {
-                StopMovement();
+                player.Y = ((int)PosInGrid.Y) * Map1.TileSize - player.Height + Map1.TileSize;
+                Stop();
+            }
+            if (Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 0)
+            {
+                falling = true;
+            }
+            if(Map1.map1[(int)PosInGrid.Y - 1, (int)PosInGrid.X] == 1)
+            {
+                player.Y = (int)PosInGrid.Y * Map1.TileSize;
+            }
+            if (Map1.map1[(int)PosInGrid.Y, (int)PosInGrid.X + 1] == 1 && player.X >= PosInGrid.X * Map1.TileSize + Map1.TileSize - player.Width)
+            {
+                player.X = (int)PosInGrid.X * Map1.TileSize - player.Width + Map1.TileSize;
+            }
+            if (Map1.map1[(int)PosInGrid.Y, (int)PosInGrid.X - 1] == 1 && player.X < PosInGrid.X * Map1.TileSize)
+            {
+                player.X = (int)PosInGrid.X * Map1.TileSize;
             }
             if (Jumps < JumpCharges && Board.HasBeenPressed(Keys.Up))
             {
                 Jump();
             }
-            player.Y -= UpSpeed;
-            if (falling == true)
-            {
-                Gravity();
-            }
-
             if (BlinkCharged == true && Board.HasBeenPressed(Keys.LeftShift))
             {
                 Blink();
@@ -120,12 +127,15 @@ namespace Slutprojekt
             {
                 GroundPound();
             }
-            
-            oldposition = player;
         }
 
         
         
+       private void CheckGridPosition()
+       {
+           PosInGrid = new Vector2(player.X / Map1.TileSize, player.Y / Map1.TileSize);
+       }
+       
         private void GroundPound()
         {
             speed = 0;
@@ -134,7 +144,7 @@ namespace Slutprojekt
         }
         public void Heal()
         {
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 50; i++)
             {
                 if (HP < MaxHP)
                 {
@@ -144,14 +154,10 @@ namespace Slutprojekt
         }
         private void Stop ()
         {
+            falling = false;
             UpSpeed = 0;
             Jumps = 0;
             GroundPounding = false;
-        }
-        private void StopMovement()
-        {
-            player = oldposition;
-            speed = 0;
         }
 
         private void Reset()
@@ -163,17 +169,14 @@ namespace Slutprojekt
         }
         private void Blink()
         {
-            for (int i = 0;  i < 150; i++)
-                {
-                    if (FacingRight == true && player.X < GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width - 19)
-                    {
-                        player.X++;
-                    }
-                    else if (FacingRight == false && player.X > 0)
-                    {
-                        player.X--;
-                    }
-                }
+            if (FacingRight == true && player.X < GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width - 19)
+            {
+                player.X += 150;
+            }                    
+            else if (FacingRight == false && player.X > 0)
+            {
+                player.X -= 150;
+            }             
         }
 
         private void RechargeBlink(GameTime gameTime)
@@ -200,7 +203,6 @@ namespace Slutprojekt
             falling = true;
             UpSpeed = 15;
             Jumps++;
-            player = oldposition;
         }
         private void Gravity()
         {
@@ -208,6 +210,7 @@ namespace Slutprojekt
                 {
                     UpSpeed--;
                 }
+            player.Y -= UpSpeed;
         }
         private void Move()
         {
@@ -234,6 +237,10 @@ namespace Slutprojekt
                 else
                 {
                     speed++;
+                }
+                if (speed == 0)
+                {
+                    Moving = false;
                 }
             }
         }

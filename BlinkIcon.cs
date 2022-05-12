@@ -39,7 +39,7 @@ namespace Slutprojekt
             {
                 color = Color.Gray;
             }
-            if (Countdown == 10)
+            if (Countdown >= 10)
             {   
                 CountdownPosition = new Vector2(icon.X + 2, icon.Y + 4);
             }
