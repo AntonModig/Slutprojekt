@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Anton/Downloads/program/Slutprojekt/Content/pixel.png</SourceFile>
-  <SourceTime>2021-11-08T09:38:45.0397825+01:00</SourceTime>
-  <DestFile>C:/Users/Anton/Downloads/program/Slutprojekt/Content/bin/Windows/Content/pixel.xnb</DestFile>
-  <DestTime>2022-05-16T12:19:19.8075797+02:00</DestTime>
+  <SourceFile>C:/Users/Anton/Downloads/program/Slutprojekt/Content/Spikes.png</SourceFile>
+  <SourceTime>2022-05-15T11:58:48.2007887+02:00</SourceTime>
+  <DestFile>C:/Users/Anton/Downloads/program/Slutprojekt/Content/bin/Windows/Content/Spikes.xnb</DestFile>
+  <DestTime>2022-05-16T12:19:19.8413385+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T18:17:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

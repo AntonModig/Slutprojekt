@@ -30,6 +30,10 @@ namespace Slutprojekt
         Texture2D HealingIcon;
         Camera Camera;
         Vector2 CameraPosition = new Vector2 (1366 / 2, 768 / 2); //Konstanter screen height / width
+        Texture2D spikes;
+        public bool GameOver;
+        Texture2D GameOverTXT;
+        GameOverText GameOverText;
 
 
         private GraphicsDeviceManager _graphics;
@@ -56,7 +60,7 @@ namespace Slutprojekt
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-           //Loading temporary texture
+           //Loading pixel
             pixel = Content.Load<Texture2D>("pixel");
            
             //Loading in titlescreen
@@ -69,6 +73,8 @@ namespace Slutprojekt
             StartTexture = Content.Load<Texture2D>("Start Button");
             QuitTexture = Content.Load<Texture2D>("Quit Button");
             ResumeTexture = Content.Load<Texture2D>("Resume");
+            //Not a button but text
+            GameOverTXT = Content.Load<Texture2D>("Game Over");
 
             //Loading it the font
             font = Content.Load<SpriteFont>("Font");
@@ -79,6 +85,9 @@ namespace Slutprojekt
             //Loading in the blink icon & healing
             BlinkIcon = Content.Load<Texture2D>("Dash Icon");
             HealingIcon = Content.Load<Texture2D>("Healing Icon");
+
+            //Loading in spikes
+            spikes = Content.Load<Texture2D>("Spikes");
 
             //Making the Buttons
             StartButton = new StartButton(StartTexture, new Vector2(300, 588));
@@ -92,12 +101,16 @@ namespace Slutprojekt
             //Making the background in game
             GameBG = new GameBackground(GameBGtxt);
 
-            
+            // Making game over text
+            GameOverText = new GameOverText(GameOverTXT);
+
+           
             //Making the ground
-            MAP1 = new Map1 (pixel, this);
+            MAP1 = new Map1 (pixel, spikes, this);
             
             //Making the Player
             Player1 = new Player (pixel, new Vector2(100, 580), MAP1);
+
 
 
             //Making the Blink Icon && healing
@@ -113,19 +126,20 @@ namespace Slutprojekt
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                {
-                    isPaused = true;
-                }     
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) && hasstarted == true && isPaused == false && GameOver == false)
+            {
+                isPaused = true;
+            }    
 
-            if (this.hasstarted == false)
+            if (this.hasstarted == false || GameOver == true)
             {
                 StartButton.Update(this);
                 QuitButton.Update(this);
             }
-            if (hasstarted == true && isPaused == false)
+            if (hasstarted == true && isPaused == false && GameOver == false)
             {
                 Player1.Update(this, gameTime);
+                MAP1.Update();
                 healthbar.Update(Player1);
                 Blinkicon.Update(this);
                 Healing.Update(Player1, gameTime, this);
@@ -156,7 +170,7 @@ namespace Slutprojekt
                 QuitButton.Draw(_spriteBatch);
             }
 
-            if (hasstarted == true && isPaused == false)
+            if (hasstarted == true && isPaused == false && GameOver == false)
             {
                 GameBG.Draw(_spriteBatch);
             }
@@ -167,12 +181,20 @@ namespace Slutprojekt
                 QuitButton.Draw(_spriteBatch);
                 ResumeButton.Draw(_spriteBatch);
             }
+            
+            if (GameOver == true)
+            {
+                GameBG.Draw(_spriteBatch);
+                GameOverText.Draw(_spriteBatch);
+                StartButton.Draw(_spriteBatch);
+                QuitButton.Draw(_spriteBatch);
+            }
 
             _spriteBatch.End();
 
             _spriteBatch.Begin(SpriteSortMode.Texture,null,null,null,null,null,Camera.Transform);
 
-            if (hasstarted == true && isPaused == false)
+            if (hasstarted == true && isPaused == false && GameOver == false)
             {
                 MAP1.Draw(_spriteBatch);
                 Player1.Draw(_spriteBatch);
@@ -182,7 +204,7 @@ namespace Slutprojekt
 
             _spriteBatch.Begin();
 
-            if (hasstarted == true && isPaused == false)
+            if (hasstarted == true && isPaused == false && GameOver == false)
             {
                 Blinkicon.Draw(_spriteBatch);
                 Healing.Draw(_spriteBatch);

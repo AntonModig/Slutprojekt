@@ -29,7 +29,15 @@ namespace Slutprojekt
                 color = Color.White;
                 if(mstate.LeftButton == ButtonState.Pressed)
                 {
-                    game.hasstarted = true;
+                    if (game.hasstarted == false)
+                    {
+                        game.hasstarted = true;
+                    }
+                    if (game.GameOver == true)
+                    {
+                        game.GameOver = false;
+                        game.Player1.Reset();
+                    }
                 }
             }
             else

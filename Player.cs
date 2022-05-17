@@ -17,19 +17,22 @@ namespace Slutprojekt
         int UpSpeed;
         int JumpCharges;
         int Jumps;
-        bool FacingRight;
+        public bool FacingRight;
         int speed;
         public bool BlinkCharged = true;
         public float timer = 10;
         const float TIMER = 10;
         float MaxHP = 100;
-        float HP = 100;
+        public float HP = 100;
         public float HPpercent;
         public bool HealingReady = true;
-        bool GroundPounding;
+        public bool GroundPounding;
         Map1 Map1;
-        Vector2 PosInGrid;
+        public Vector2 PosInGrid;
         bool Moving;
+        public List<Attack> ActiveAttacks = new List<Attack>();
+        List<Attack> UsedAttacks = new List<Attack>();
+        Vector2 startpos;
 
 
          public Player (Texture2D texture, Vector2 position, Map1 Map1)
@@ -37,6 +40,7 @@ namespace Slutprojekt
             this.texture = texture;
             this.position = position;
             this.Map1 = Map1;
+            startpos = position;
             player = new Rectangle((int)position.X, (int)position.Y, 20, 20);
         }
 
@@ -48,15 +52,9 @@ namespace Slutprojekt
             HPpercent = HP / MaxHP;
             CheckGridPosition();
 
-            
-            if (kstate.IsKeyDown(Keys.O))
-            {
-                HP--;
-            }
             if (HP <= 0)
             {
-                game.hasstarted = false;
-                Reset();
+                game.GameOver = true;
             }
             if (kstate.IsKeyDown(Keys.Left))
             {
@@ -80,31 +78,42 @@ namespace Slutprojekt
             {
                 Gravity();
             }
-            if (Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 1 && player.Y >= PosInGrid.Y * Map1.TileSize + Map1.TileSize - player.Height)
-            {
-                player.Y = ((int)PosInGrid.Y) * Map1.TileSize - player.Height + Map1.TileSize;
-                Stop();
-            }
-            if (Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 0)
-            {
-                falling = true;
-            }
-            if(Map1.map1[(int)PosInGrid.Y - 1, (int)PosInGrid.X] == 1)
-            {
-                player.Y = (int)PosInGrid.Y * Map1.TileSize;
-            }
-            if (Map1.map1[(int)PosInGrid.Y, (int)PosInGrid.X + 1] == 1 && player.X >= PosInGrid.X * Map1.TileSize + Map1.TileSize - player.Width)
-            {
-                player.X = (int)PosInGrid.X * Map1.TileSize - player.Width + Map1.TileSize;
-            }
-            if (Map1.map1[(int)PosInGrid.Y, (int)PosInGrid.X - 1] == 1 && player.X < PosInGrid.X * Map1.TileSize)
-            {
-                player.X = (int)PosInGrid.X * Map1.TileSize;
-            }
+
+            CheckCollisions();
+
             if (Jumps < JumpCharges && Board.HasBeenPressed(Keys.Up))
             {
                 Jump();
             }
+
+            if (Board.HasBeenPressed(Keys.Space))
+            {
+                if (FacingRight == true)
+                {
+                    ActiveAttacks.Add(new Attack(texture, new Vector2(player.X + player.Width, player.Y), this));
+                }
+                if (FacingRight == false)
+                {
+                    ActiveAttacks.Add(new Attack(texture, new Vector2(player.X - 15, player.Y), this));
+                }
+            }
+            foreach (Attack attack in ActiveAttacks)
+            {
+                attack.Update();
+                if (attack.attack.Y > player.Y + player.Height - attack.attack.Height)
+                {
+                    UsedAttacks.Add(attack);
+                }
+            }
+            foreach (Attack Used in UsedAttacks)
+            {
+                ActiveAttacks.Remove(Used);
+            }
+            if (UsedAttacks.Count() > 1)
+            {
+                UsedAttacks.RemoveAt(0);
+            }
+
             if (BlinkCharged == true && Board.HasBeenPressed(Keys.LeftShift))
             {
                 Blink();
@@ -118,7 +127,7 @@ namespace Slutprojekt
             {
                 HP = MaxHP;
             }
-            if (HealingReady == true && Board.HasBeenPressed(Keys.E))
+            if (HealingReady == true && Board.HasBeenPressed(Keys.E) && HP < MaxHP)
             {
                 Heal();
                 HealingReady = false;
@@ -131,6 +140,35 @@ namespace Slutprojekt
 
         
         
+        private void CheckCollisions()
+        {
+            if (Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X] != 0 && Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X] != 5 && player.Y >= PosInGrid.Y * Map1.TileSize + Map1.TileSize - player.Height)
+            {
+                player.Y = ((int)PosInGrid.Y) * Map1.TileSize - player.Height + Map1.TileSize;
+                Stop(); 
+            }
+            if (Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X + 1] != 0 && player.Y >= PosInGrid.Y * Map1.TileSize + Map1.TileSize - player.Height && player.X > PosInGrid.X * Map1.TileSize - player.Width + Map1.TileSize)
+            {
+                player.Y = ((int)PosInGrid.Y) * Map1.TileSize - player.Height + Map1.TileSize;
+            }
+            if (Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 0 || Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 5)
+            {
+                falling = true;
+            }
+            if(Map1.map1[(int)PosInGrid.Y - 1, (int)PosInGrid.X] != 0 && player.Y < PosInGrid.Y * Map1.TileSize)
+            {
+                player.Y = (int)PosInGrid.Y * Map1.TileSize;
+            }
+            if (Map1.map1[(int)PosInGrid.Y, (int)PosInGrid.X + 1] != 0 && player.X >= PosInGrid.X * Map1.TileSize + Map1.TileSize - player.Width)
+            {
+                player.X = (int)PosInGrid.X * Map1.TileSize - player.Width + Map1.TileSize;
+            }
+            if (Map1.map1[(int)PosInGrid.Y, (int)PosInGrid.X - 1] != 0 && player.X < PosInGrid.X * Map1.TileSize)
+            {
+                player.X = (int)PosInGrid.X * Map1.TileSize;
+            }
+      }
+      
        private void CheckGridPosition()
        {
            PosInGrid = new Vector2(player.X / Map1.TileSize, player.Y / Map1.TileSize);
@@ -160,22 +198,32 @@ namespace Slutprojekt
             GroundPounding = false;
         }
 
-        private void Reset()
+        public void Reset()
         {
             HP = 100;
             MaxHP = 100;
             ChargeBlink();
+            player.X = 100;
+            player.Y = 580;
+            Map1.map1 = Map1.startmap;
+            speed = 0;
+            Map1.PickMap();
             RefillHeal();
+
         }
         private void Blink()
         {
-            if (FacingRight == true && player.X < GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width - 19)
+            for (int i = 0; i < 150; i++)
             {
-                player.X += 150;
-            }                    
-            else if (FacingRight == false && player.X > 0)
-            {
-                player.X -= 150;
+                if (FacingRight == true)
+                {
+                    player.X++;
+                }                    
+                else if (FacingRight == false)
+                {
+                    player.X--;
+                }
+                CheckCollisions();
             }             
         }
 
@@ -249,6 +297,10 @@ namespace Slutprojekt
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, player, Color.White);
+            foreach (Attack attack in ActiveAttacks)
+            {
+                attack.Draw(spriteBatch);
+            }
         }
     }
 }
