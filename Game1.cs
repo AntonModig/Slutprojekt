@@ -34,6 +34,8 @@ namespace Slutprojekt
         public bool GameOver;
         Texture2D GameOverTXT;
         GameOverText GameOverText;
+        BigBoyCastle Castle;
+        Texture2D CastleTXT;
 
 
         private GraphicsDeviceManager _graphics;
@@ -89,6 +91,9 @@ namespace Slutprojekt
             //Loading in spikes
             spikes = Content.Load<Texture2D>("Spikes");
 
+            //Loading in background castle
+            CastleTXT = Content.Load<Texture2D>("BigBoyCastle");
+
             //Making the Buttons
             StartButton = new StartButton(StartTexture, new Vector2(300, 588));
             QuitButton = new QuitButton(QuitTexture, new Vector2(866, 588));
@@ -104,6 +109,8 @@ namespace Slutprojekt
             // Making game over text
             GameOverText = new GameOverText(GameOverTXT);
 
+            //Making background castle
+            Castle = new BigBoyCastle(CastleTXT);
            
             //Making the ground
             MAP1 = new Map1 (pixel, spikes, this);
@@ -196,6 +203,7 @@ namespace Slutprojekt
 
             if (hasstarted == true && isPaused == false && GameOver == false)
             {
+                Castle.Draw(_spriteBatch);
                 MAP1.Draw(_spriteBatch);
                 Player1.Draw(_spriteBatch);
             }

@@ -142,28 +142,38 @@ namespace Slutprojekt
         
         private void CheckCollisions()
         {
-            if (Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X] != 0 && Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X] != 5 && player.Y >= PosInGrid.Y * Map1.TileSize + Map1.TileSize - player.Height)
+            if (Map1.ActiveMap[(int)PosInGrid.Y + 1, (int)PosInGrid.X] != 0 && Map1.ActiveMap[(int)PosInGrid.Y + 1, (int)PosInGrid.X] != 5 && Map1.ActiveMap[(int)PosInGrid.Y + 1, (int)PosInGrid.X] != 3 && player.Y >= PosInGrid.Y * Map1.TileSize + Map1.TileSize - player.Height)
             {
                 player.Y = ((int)PosInGrid.Y) * Map1.TileSize - player.Height + Map1.TileSize;
                 Stop(); 
             }
-            if (Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X + 1] != 0 && player.Y >= PosInGrid.Y * Map1.TileSize + Map1.TileSize - player.Height && player.X > PosInGrid.X * Map1.TileSize - player.Width + Map1.TileSize)
+            if (Map1.ActiveMap[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 3 && GroundPounding == false && player.Y >= PosInGrid.Y * Map1.TileSize + Map1.TileSize - player.Height)
+            {
+                player.Y = ((int)PosInGrid.Y) * Map1.TileSize - player.Height + Map1.TileSize;
+                Stop(); 
+            }
+            if (Map1.ActiveMap[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 3 && GroundPounding == true)
+            {
+                
+            }
+            if (Map1.ActiveMap[(int)PosInGrid.Y + 1, (int)PosInGrid.X + 1] != 0 && player.Y >= PosInGrid.Y * Map1.TileSize + Map1.TileSize - player.Height && player.X > PosInGrid.X * Map1.TileSize - player.Width + Map1.TileSize)
             {
                 player.Y = ((int)PosInGrid.Y) * Map1.TileSize - player.Height + Map1.TileSize;
             }
-            if (Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 0 || Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 5)
+            if (Map1.ActiveMap[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 0 || Map1.ActiveMap[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 5)
             {
                 falling = true;
             }
-            if(Map1.map1[(int)PosInGrid.Y - 1, (int)PosInGrid.X] != 0 && player.Y < PosInGrid.Y * Map1.TileSize)
+            if(Map1.ActiveMap[(int)PosInGrid.Y - 1, (int)PosInGrid.X] != 0 && player.Y < PosInGrid.Y * Map1.TileSize)
             {
                 player.Y = (int)PosInGrid.Y * Map1.TileSize;
+                UpSpeed *= -1;
             }
-            if (Map1.map1[(int)PosInGrid.Y, (int)PosInGrid.X + 1] != 0 && player.X >= PosInGrid.X * Map1.TileSize + Map1.TileSize - player.Width)
+            if (Map1.ActiveMap[(int)PosInGrid.Y, (int)PosInGrid.X + 1] != 0 && player.X >= PosInGrid.X * Map1.TileSize + Map1.TileSize - player.Width)
             {
                 player.X = (int)PosInGrid.X * Map1.TileSize - player.Width + Map1.TileSize;
             }
-            if (Map1.map1[(int)PosInGrid.Y, (int)PosInGrid.X - 1] != 0 && player.X < PosInGrid.X * Map1.TileSize)
+            if (Map1.ActiveMap[(int)PosInGrid.Y, (int)PosInGrid.X - 1] != 0 && player.X < PosInGrid.X * Map1.TileSize)
             {
                 player.X = (int)PosInGrid.X * Map1.TileSize;
             }
@@ -205,7 +215,7 @@ namespace Slutprojekt
             ChargeBlink();
             player.X = 100;
             player.Y = 580;
-            Map1.map1 = Map1.startmap;
+            Map1.ActiveMap = Map1.startmap;
             speed = 0;
             Map1.PickMap();
             RefillHeal();

@@ -84,28 +84,28 @@ namespace Slutprojekt
         }
         private void CheckCollisions()
         {
-            if (Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X] != 0 && Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X] != 5 && enemy.Y >= PosInGrid.Y * Map1.TileSize + Map1.TileSize - enemy.Height)
+            if (Map1.ActiveMap[(int)PosInGrid.Y + 1, (int)PosInGrid.X] != 0 && Map1.ActiveMap[(int)PosInGrid.Y + 1, (int)PosInGrid.X] != 5 && enemy.Y >= PosInGrid.Y * Map1.TileSize + Map1.TileSize - enemy.Height)
             {
                 enemy.Y = ((int)PosInGrid.Y) * Map1.TileSize - enemy.Height + Map1.TileSize;
                 Stop();
             }
-            else if (Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X + 1] != 0 && enemy.Y >= PosInGrid.Y * Map1.TileSize + Map1.TileSize - enemy.Height && enemy.X > PosInGrid.X * Map1.TileSize - enemy.Width + Map1.TileSize)
+            else if (Map1.ActiveMap[(int)PosInGrid.Y + 1, (int)PosInGrid.X + 1] != 0 && enemy.Y >= PosInGrid.Y * Map1.TileSize + Map1.TileSize - enemy.Height && enemy.X > PosInGrid.X * Map1.TileSize - enemy.Width + Map1.TileSize)
             {
                 enemy.Y = ((int)PosInGrid.Y) * Map1.TileSize - enemy.Height + Map1.TileSize;
             }
-            else if (Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 0 || Map1.map1[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 5)
+            else if (Map1.ActiveMap[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 0 || Map1.ActiveMap[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 5)
             {
                 falling = true;
             }
-            if(Map1.map1[(int)PosInGrid.Y - 1, (int)PosInGrid.X] != 0 && enemy.Y < PosInGrid.Y * Map1.TileSize)
+            if(Map1.ActiveMap[(int)PosInGrid.Y - 1, (int)PosInGrid.X] != 0 && enemy.Y < PosInGrid.Y * Map1.TileSize)
             {
                 enemy.Y = (int)PosInGrid.Y * Map1.TileSize;
             }
-            if (Map1.map1[(int)PosInGrid.Y, (int)PosInGrid.X + 1] != 0 && enemy.X >= PosInGrid.X * Map1.TileSize + Map1.TileSize - enemy.Width)
+            if (Map1.ActiveMap[(int)PosInGrid.Y, (int)PosInGrid.X + 1] != 0 && enemy.X >= PosInGrid.X * Map1.TileSize + Map1.TileSize - enemy.Width)
             {
                 enemy.X = (int)PosInGrid.X * Map1.TileSize - enemy.Width + Map1.TileSize;
             }
-            if (Map1.map1[(int)PosInGrid.Y, (int)PosInGrid.X - 1] != 0 && enemy.X < PosInGrid.X * Map1.TileSize)
+            if (Map1.ActiveMap[(int)PosInGrid.Y, (int)PosInGrid.X - 1] != 0 && enemy.X < PosInGrid.X * Map1.TileSize)
             {
                 enemy.X = (int)PosInGrid.X * Map1.TileSize;
             }

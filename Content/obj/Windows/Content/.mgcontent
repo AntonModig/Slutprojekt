@@ -4,6 +4,7 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/Anton/Downloads/program/Slutprojekt/Content/BigBoyCastle.png</File>
     <File>C:/Users/Anton/Downloads/program/Slutprojekt/Content/Dash Icon.png</File>
     <File>C:/Users/Anton/Downloads/program/Slutprojekt/Content/Font.spritefont</File>
     <File>C:/Users/Anton/Downloads/program/Slutprojekt/Content/Game Over.png</File>
@@ -17,6 +18,7 @@
     <File>C:/Users/Anton/Downloads/program/Slutprojekt/Content/TitleScreen.jpg</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
