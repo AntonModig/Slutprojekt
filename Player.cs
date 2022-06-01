@@ -127,7 +127,7 @@ namespace Slutprojekt
             {
                 HP = MaxHP;
             }
-            if (HealingReady == true && Board.HasBeenPressed(Keys.E) && HP < MaxHP)
+            if (HealingReady == true && Board.HasBeenPressed(Keys.Q) && HP < MaxHP)
             {
                 Heal();
                 HealingReady = false;
@@ -151,10 +151,6 @@ namespace Slutprojekt
             {
                 player.Y = ((int)PosInGrid.Y) * Map1.TileSize - player.Height + Map1.TileSize;
                 Stop(); 
-            }
-            if (Map1.ActiveMap[(int)PosInGrid.Y + 1, (int)PosInGrid.X] == 3 && GroundPounding == true)
-            {
-                
             }
             if (Map1.ActiveMap[(int)PosInGrid.Y + 1, (int)PosInGrid.X + 1] != 0 && player.Y >= PosInGrid.Y * Map1.TileSize + Map1.TileSize - player.Height && player.X > PosInGrid.X * Map1.TileSize - player.Width + Map1.TileSize)
             {
@@ -187,7 +183,7 @@ namespace Slutprojekt
         private void GroundPound()
         {
             speed = 0;
-            UpSpeed = -30;
+            UpSpeed = -50;
             GroundPounding = true;
         }
         public void Heal()
@@ -215,8 +211,8 @@ namespace Slutprojekt
             ChargeBlink();
             player.X = 100;
             player.Y = 580;
-            Map1.ActiveMap = Map1.startmap;
             speed = 0;
+            Map1.Enemies.Clear();
             Map1.PickMap();
             RefillHeal();
 

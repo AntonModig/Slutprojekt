@@ -92,3 +92,5 @@ C:\Users\Anton\Downloads\program\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Hea
 C:\Users\Anton\Downloads\program\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Spikes.xnb
 C:\Users\Anton\Downloads\program\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Game Over.xnb
 C:\Users\Anton\Downloads\program\Slutprojekt\bin\Debug\netcoreapp3.1\Content\BigBoyCastle.xnb
+C:\Users\Anton\Downloads\program\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Portal.xnb
+C:\Users\Anton\Downloads\program\Slutprojekt\bin\Debug\netcoreapp3.1\Content\Coin.xnb

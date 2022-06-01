@@ -29,13 +29,16 @@ namespace Slutprojekt
         HealAbility Healing;
         Texture2D HealingIcon;
         Camera Camera;
-        Vector2 CameraPosition = new Vector2 (1366 / 2, 768 / 2); //Konstanter screen height / width
+        Vector2 CameraPosition = new Vector2 (1366 / 2, 768 / 2); 
         Texture2D spikes;
         public bool GameOver;
         Texture2D GameOverTXT;
         GameOverText GameOverText;
         BigBoyCastle Castle;
         Texture2D CastleTXT;
+        Texture2D PortalTXT;
+        Texture2D CoinsTXT;
+        public Coin Coin;
 
 
         private GraphicsDeviceManager _graphics;
@@ -46,7 +49,7 @@ namespace Slutprojekt
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            _graphics.IsFullScreen = false;
+            _graphics.IsFullScreen = true;
             _graphics.PreferredBackBufferHeight = 768;
             _graphics.PreferredBackBufferWidth = 1366;
         }
@@ -88,6 +91,12 @@ namespace Slutprojekt
             BlinkIcon = Content.Load<Texture2D>("Dash Icon");
             HealingIcon = Content.Load<Texture2D>("Healing Icon");
 
+            //Portal texture
+            PortalTXT = Content.Load<Texture2D>("Portal");
+
+            //Coin Texture
+            CoinsTXT = Content.Load<Texture2D>("Coin");
+
             //Loading in spikes
             spikes = Content.Load<Texture2D>("Spikes");
 
@@ -106,6 +115,9 @@ namespace Slutprojekt
             //Making the background in game
             GameBG = new GameBackground(GameBGtxt);
 
+            //Coin
+            Coin = new Coin(CoinsTXT, font, this);
+
             // Making game over text
             GameOverText = new GameOverText(GameOverTXT);
 
@@ -113,12 +125,10 @@ namespace Slutprojekt
             Castle = new BigBoyCastle(CastleTXT);
            
             //Making the ground
-            MAP1 = new Map1 (pixel, spikes, this);
+            MAP1 = new Map1 (pixel, spikes, PortalTXT, this);
             
             //Making the Player
             Player1 = new Player (pixel, new Vector2(100, 580), MAP1);
-
-
 
             //Making the Blink Icon && healing
             Blinkicon = new BlinkIcon(BlinkIcon);
@@ -143,6 +153,10 @@ namespace Slutprojekt
                 StartButton.Update(this);
                 QuitButton.Update(this);
             }
+            if (GameOver == true)
+            {
+                Coin.Update();
+            }
             if (hasstarted == true && isPaused == false && GameOver == false)
             {
                 Player1.Update(this, gameTime);
@@ -150,6 +164,7 @@ namespace Slutprojekt
                 healthbar.Update(Player1);
                 Blinkicon.Update(this);
                 Healing.Update(Player1, gameTime, this);
+                Coin.Update();
 
             }
             if (isPaused == true)
@@ -192,6 +207,7 @@ namespace Slutprojekt
             if (GameOver == true)
             {
                 GameBG.Draw(_spriteBatch);
+                Coin.Draw(_spriteBatch);
                 GameOverText.Draw(_spriteBatch);
                 StartButton.Draw(_spriteBatch);
                 QuitButton.Draw(_spriteBatch);
@@ -217,6 +233,7 @@ namespace Slutprojekt
                 Blinkicon.Draw(_spriteBatch);
                 Healing.Draw(_spriteBatch);
                 healthbar.Draw(_spriteBatch);
+                Coin.Draw(_spriteBatch);
             }
 
             _spriteBatch.End();

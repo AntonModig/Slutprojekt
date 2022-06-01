@@ -66,6 +66,8 @@ namespace Slutprojekt
                     if (Player.player.X < enemy.X)
                     {
                         enemy.X += 40;
+                        UpSpeed = 5;
+                        falling = true;
                     }
                 }
             }

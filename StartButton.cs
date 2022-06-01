@@ -36,6 +36,8 @@ namespace Slutprojekt
                     if (game.GameOver == true)
                     {
                         game.GameOver = false;
+                        game.Coin.CoinCounter = 0;
+                        game.MAP1.CoinMultiplier = 1;
                         game.Player1.Reset();
                     }
                 }
